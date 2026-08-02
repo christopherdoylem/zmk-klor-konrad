@@ -24,8 +24,7 @@
 #define LOWER 1
 #define RAISE 2
 #define NAV 3
-#define GAMING 4
-#define QWERTY 5
+#define QWERTY 4
 
 #define ___ &trans
 #define slashP &th LS(SLASH) P
@@ -37,8 +36,10 @@
 / {
     combos {
         compatible = "zmk,combos";
+    
+    // Right hand //
 
-        combo_enter {
+    combo_enter {
             timeout-ms = <40>;
             bindings = <&kp RETURN>;
             key-positions = <17 18 19>;
@@ -98,6 +99,20 @@
             key-positions = <17 19>;
         };
 
+    // Left-hand//
+        
+        combo_escape {
+            timeout-ms = <40>;
+            bindings = <&kp ESCAPE>;
+            key-positions = <1 2>;
+        };
+
+        combo_tab {
+            timeout-ms = <40>;
+            bindings = <&kp TAB>;
+            key-positions = <2 3>;
+        };
+
     };
 
     behaviors {
@@ -154,26 +169,6 @@
             flavor = "tap-preferred";
         };
 
-        tc: tc {
-          compatible = "zmk,behavior-hold-tap";
-          label = "Thumb hold for layer";
-          bindings = <&mo>, <&kp>;
-
-          #binding-cells = <2>;
-          tapping-term-ms = <280>;
-          quick-tap-ms = <175>;
-          require-prior-idle-ms = <150>;
-          flavor = "tap-preferred";
-      };
-        
-        tb_B: tb_B {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TB_B";
-            #binding-cells = <0>;
-            bindings = <&kp B>, <&kp LC(B)>;
-            tapping-term-ms = <200>;
-        };
-
         angle_morph: angle_morph {
             compatible = "zmk,behavior-mod-morph";
             label = "angle_morph";
@@ -181,55 +176,6 @@
             bindings = <&kp LT>, <&kp GT>;
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
-
-        GamRT: GamRT {
-            compatible = "zmk,behavior-mod-morph";
-            label = "GamRT";
-            #binding-cells = <0>;
-            bindings = <&kp R>, <&kp T>;
-            mods = <(MOD_LSFT | MOD_RSFT)>;
-        };
-
-        GamFG: GamFG {
-            compatible = "zmk,behavior-mod-morph";
-            label = "GamFG";
-            #binding-cells = <0>;
-            bindings = <&kp F>, <&kp G>;
-            mods = <(MOD_LSFT | MOD_RSFT)>;
-        };
-
-        GamVB: GamVB {
-            compatible = "zmk,behavior-mod-morph";
-            label = "GamVB";
-            #binding-cells = <0>;
-            bindings = <&kp V>, <&kp B>;
-            mods = <(MOD_LSFT | MOD_RSFT)>;
-        };
-
-        GamEI: GamEI {
-            compatible = "zmk,behavior-mod-morph";
-            label = "GamEI";
-            #binding-cells = <0>;
-            bindings = <&kp E>, <&kp I>;
-            mods = <(MOD_LSFT | MOD_RSFT)>;
-        };
-
-        vim_left: vim_left {
-          compatible = "zmk,behavior-mod-morph";
-          label = "vim_left";
-          #binding-cells = <0>;
-          bindings = <&kp LEFT>, <&kp N0>;
-          mods = <(MOD_LSFT | MOD_RSFT)>;
-      };
-        
-        vim_right: vim_right {
-          compatible = "zmk,behavior-mod-morph";
-          label = "vim_right";
-          #binding-cells = <0>;
-          bindings = <&kp RIGHT>, <&kp DLLR>;
-          mods = <(MOD_LSFT | MOD_RSFT)>;
-      };
-
 
     };
 
@@ -299,7 +245,7 @@ keymap {
             //╭──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤                                 ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────╮
                   ___            &kp ESCAPE     &kp TAB        &kp MINUS      &kp EQUAL      &kp GRAVE                                        &kp F11        &kp F4         &kp F5         &kp F6         &kp BSLH       ___
             //├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤ ╭──────────────┬──────────────╮ ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-                  ___            ___            ___            &kp UNDER      &kp PLUS       ___              ___            ___              &kp F10        &kp F1         &kp F2         &kp F3         &kp PIPE       &kp GRAVE
+                  ___            ___            ___            &kp UNDER      &kp PLUS       &kp TILDE        ___            ___              &kp F10        &kp F1         &kp F2         &kp F3         &kp PIPE       &kp GRAVE
             //╰──────────────┴──────────────┴──────────────┼──────────────┼──────────────┼──────────────┤ ├──────────────┼──────────────┤ ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
                                                                ___            ___            ___              ___            ___              ___            ___            ___
             //                                             ╰──────────────┴──────────────┴──────────────╯ ╰──────────────┴──────────────╯ ╰──────────────┴──────────────┴──────────────╯
@@ -355,40 +301,5 @@ keymap {
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
-
-        // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
-        // DISABLED. Kept LAST in the file deliberately: enabling it appends index 5
-        // and shifts nothing above it, so every numeral in the layers above stays
-        // valid. Do not move this block above qwerty_layer.
-        // Node renamed gaming_layer -- `GAMING {` collides with `#define GAMING 5`
-        // and the preprocessor expands it to `5 {`.
-        // Padded to 44: centre pair added in row 3, thumbs padded to 4 + 4.
-        // ENTER/SPACE assumed at the same two positions as base's &mo 1 / &kp BSPC.
-        /*
-        gaming_layer {
-            // ┌───────────────────────────────────────────────────────────┐
-
-            display-name = "Gaming";
-
-            // └───────────────────────────────────────────────────────────┘
-
-            bindings = <
-            //               ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮                                 ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
-                                 &kp TAB        &kp Q          &kp W          &GamEI         &GamRT                                           ___            ___            ___            ___            ___
-            //╭──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤                                 ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────╮
-                  ___            &kp LCTL       &kp A          &kp S          &kp D          &GamFG                                           ___            ___            ___            ___            ___            ___
-            //├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤ ╭──────────────┬──────────────╮ ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-                  &tog 5         &kp LALT       &kp Z          &kp X          &kp C          &GamVB           ___            ___              ___            ___            ___            ___            ___            ___
-            //╰──────────────┴──────────────┴──────────────┼──────────────┼──────────────┼──────────────┤ ├──────────────┼──────────────┤ ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
-                                                               &kp ENTER      &kp SPACE      ___              ___            ___              ___            ___            ___
-            //                                             ╰──────────────┴──────────────┴──────────────╯ ╰──────────────┴──────────────╯ ╰──────────────┴──────────────┴──────────────╯
-            >;
-
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-        };
-        */
-
-        // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
     };
 };
