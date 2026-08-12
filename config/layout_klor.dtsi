@@ -71,7 +71,8 @@
 #define POS_T4L   39
 #define POS_T4R   40
 
-#define HAS_ENCODER
+// HAS_ENCODER is not set here. The KLOR design has a knob on each half,
+// but konrad was built without them, and all three klors share this file.
 #define HAS_OUTER_R3
 // HAS_GAMING and HAS_QWERTY are not set here. All three klors share this
 // file because they are the same board electrically, but they don't all
